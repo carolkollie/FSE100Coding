@@ -1,15 +1,24 @@
+let g1a, g1b, g1c, g1d;
+let game1img; // Declare the variable for the Game 1 image
 let bgImage;
 let currentPage = 'home'; 
-let button1, button2, button3, backButton;
+let button1, button2, button3, backButton, playButton;
+let f1, f2, f3, f4;
 
 function preload() {
   bgImage = loadImage('IMG_2204 2.jpg');
+  game1img = loadImage('bo.jfif'); 
+  f1 = loadImage('face1.png');
+  f2 = loadImage('face2.png');
+  f3 = loadImage('face3.png');
+  f4 = loadImage('face4.png');
+
 }
 
 function setup() {
   createCanvas(1000, 600);
 
-  //button to Game 1
+  // Button to Game 1
   button1 = createButton('Page 1');
   button1.position(195, 350);
   button1.style('width', '210px');
@@ -17,7 +26,7 @@ function setup() {
   button1.mousePressed(() => currentPage = 'page1');
   makeButtonInvisible(button1); 
 
-  //button to Game 2
+  // Button to Game 2
   button2 = createButton('Page 2');
   button2.position(425, 350);
   button2.style('width', '150px');
@@ -25,7 +34,7 @@ function setup() {
   button2.mousePressed(() => currentPage = 'page2');
   makeButtonInvisible(button2); 
 
-  //button to Game 3
+  // Button to Game 3
   button3 = createButton('Page 3');
   button3.position(590, 350);
   button3.style('width', '210px');
@@ -33,11 +42,17 @@ function setup() {
   button3.mousePressed(() => currentPage = 'page3');
   makeButtonInvisible(button3); 
 
-  //Back button for games
+  // Back button for games
   backButton = createButton('Back');
   backButton.position(900, 550);
   backButton.mousePressed(() => currentPage = 'home');
   backButton.hide();
+
+  // Play button for Game 1
+  playButton = createButton('Play');
+  playButton.position(400, 500); // Adjust the position as needed
+  playButton.mousePressed(() => currentPage = 'g1a');
+  playButton.hide(); // Hide it initially
 }
 
 function draw() {
@@ -64,13 +79,31 @@ function draw() {
 
   } else if (currentPage === 'page1') {
     // Game 1
-    background(100, 150, 200);
+    image(game1img, 100, 50, 800, 500); // Display the Game 1 image
+    playButton.show(); // Show the play button
+    playButton.position(480, 300);
+    playButton.style('width', '100px'); // Set the width
+    playButton.style('height', '40px');  // Set the height
+    playButton.style('font-size', '24px');
+
+    textSize(32);
+    fill(200); // Change text color to make it visible over the image
+    text('Who is Who???', 400, 400);
+
+    showBackButton();
+    
+    } else if (currentPage === 'g1a') {
+    // Game 1 level 1
+    image(f1, 100, 50, 800, 500);
+    background(150, 250, 150);
     textSize(32);
     fill(255);
-    text('FACE MATCHING GAME', 500, 100);
+    text('Select The Correct Name', 300, 50);
 
     showBackButton();
 
+    
+  
   } else if (currentPage === 'page2') {
     // Game 2
     background(150, 200, 100);
@@ -88,6 +121,10 @@ function draw() {
     text('This is Page 3', 400, 300);
 
     showBackButton();
+  }
+
+  if (currentPage !== 'page1') {
+    playButton.hide(); // Hide the play button if not on Page 1
   }
 }
 
